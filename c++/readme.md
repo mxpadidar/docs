@@ -1,6 +1,6 @@
 # Resource
 
-They are collected from <https://cplusplus.com/doc/tutorial/>
+Source: <https://cplusplus.com/doc/tutorial/>
 
 Remaining content is:
 
