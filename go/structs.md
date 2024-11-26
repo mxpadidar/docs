@@ -1,9 +1,5 @@
 # **Struct in Go**
 
-Structs in Go are composite types that group together fields (properties) under a single type. They are commonly used to define complex data structures.
-
----
-
 ## **Basic Syntax**
 
 To define and use a struct in Go:
@@ -36,8 +32,6 @@ p := &Person{
 fmt.Println(p.Name) // Output: Alice
 p.Age = 31          // Modify the Age field
 ```
-
----
 
 ## **Struct Composition**
 
@@ -73,8 +67,6 @@ fmt.Println(e.City)    // Output: New York
 fmt.Println(e.Address) // Output: {New York 10001}
 ```
 
----
-
 ## **Struct Constructors**
 
 Go does not have explicit constructors, but you can create factory functions to initialize structs:
@@ -97,6 +89,9 @@ fmt.Println(p.Name) // Output: Alice
 
 Methods in Go are functions with a receiver, which is a reference to the struct. Receivers can be either by value or by pointer:
 
+- **Pointer receiver**: Use this when you want to modify the original struct or avoid copying large structs.
+- **Value receiver**: Use this for small structs when you don't need to modify the original.
+
 ```go
 // Method with a pointer receiver
 func (p *Person) Greet() string {
@@ -112,13 +107,6 @@ p := Person{Name: "Alice", Age: 30}
 fmt.Println(p.Greet())   // Output: Hello, my name is Alice
 fmt.Println(p.IsAdult()) // Output: true
 ```
-
-### **Pointer vs. Value Receivers**
-
-- **Pointer receiver**: Use this when you want to modify the original struct or avoid copying large structs.
-- **Value receiver**: Use this for small structs when you don't need to modify the original.
-
----
 
 ## **Tags in Struct Fields**
 
@@ -142,8 +130,6 @@ data, _ := json.Marshal(u)
 fmt.Println(string(data)) // Output: {"id":1,"name":"John Doe","email":"john@example.com"}
 ```
 
----
-
 ## **Anonymous Structs**
 
 Go supports anonymous structs, useful for one-off data structures:
@@ -160,8 +146,6 @@ p := struct {
 fmt.Println(p.Name) // Output: Alice
 ```
 
----
-
 ## **Comparing Structs**
 
 Structs in Go can be compared using the `==` and `!=` operators. Two structs are equal if all their fields are equal:
@@ -173,12 +157,10 @@ p2 := Person{Name: "Alice", Age: 30}
 fmt.Println(p1 == p2) // Output: true
 ```
 
-### Note:
+### Note
 
 - Only comparable fields (e.g., numbers, strings, or other comparable structs) can be compared.
 - Structs with slice, map, or function fields cannot be directly compared.
-
----
 
 ## **Copying Structs**
 
@@ -203,8 +185,6 @@ p2.Age = 31
 fmt.Println(p1.Age) // Output: 31
 ```
 
----
-
 ## **Embedding Interfaces in Structs**
 
 Structs can implement interfaces implicitly, allowing for polymorphism:
@@ -226,8 +206,6 @@ var g Greeter = Person{Name: "Alice"}
 fmt.Println(g.Greet()) // Output: Hello, Alice
 ```
 
----
-
 ## **Zero Value of Structs**
 
 The zero value of a struct is a struct with all its fields set to their zero values:
@@ -241,8 +219,6 @@ type Person struct {
 var p Person
 fmt.Println(p) // Output: { 0}
 ```
-
----
 
 ## **Best Practices**
 
