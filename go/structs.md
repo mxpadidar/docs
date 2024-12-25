@@ -108,6 +108,52 @@ fmt.Println(p.Greet())   // Output: Hello, my name is Alice
 fmt.Println(p.IsAdult()) // Output: true
 ```
 
+---
+
+## **Struct Embedding in Go**
+
+**Struct embedding** is a feature in Go that allows one struct to include another struct. This promotes code reuse and composition, enabling the embedding struct to access fields and methods of the embedded struct as if they were its own.
+
+Go emphasizes composition rather than classical inheritance, and struct embedding is a key tool for this.
+
+- The fields and methods of the embedded struct are promoted to the embedding struct.
+
+- If both the embedding and embedded structs have fields or methods with the same name, explicit access via the embedded struct's name is required.
+
+```go
+type Person struct {
+    Name    string
+    Age     int
+}
+type Logger struct{}
+
+func (l Logger) Log(message string) {
+    fmt.Println("Log:", message)
+}
+
+
+type Employee struct {
+    ID int
+    Name string
+    Person
+    Logger
+}
+
+employee := Employee{
+    ID: 1,
+    Name: "Alice",
+    Person: Person{
+        Name: "Alice",
+        Age:  30,
+    },
+    Logger: Logger{},
+}
+
+employee.log(employee.Name) // Name of the employee struct itself
+employee.log(employee.Person.Name) // Name of the embedded Person struct, just can be accessed by Person
+employee.log(employee.Age) // can be accessed directly by the employee struct
+```
+
 ## **Tags in Struct Fields**
 
 Struct fields can have tags, which are string metadata often used in tasks like encoding/decoding (e.g., JSON, XML). Tags are accessed via reflection.
@@ -183,27 +229,6 @@ p2 := p1
 p2.Age = 31
 
 fmt.Println(p1.Age) // Output: 31
-```
-
-## **Embedding Interfaces in Structs**
-
-Structs can implement interfaces implicitly, allowing for polymorphism:
-
-```go
-type Greeter interface {
-    Greet() string
-}
-
-type Person struct {
-    Name string
-}
-
-func (p Person) Greet() string {
-    return "Hello, " + p.Name
-}
-
-var g Greeter = Person{Name: "Alice"}
-fmt.Println(g.Greet()) // Output: Hello, Alice
 ```
 
 ## **Zero Value of Structs**
